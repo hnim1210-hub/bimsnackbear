@@ -94,8 +94,11 @@ export function initTrail() {
   chips.forEach((chip) => chip.addEventListener('click', () => {
     const k = chip.dataset.kind;
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+    // Ẩn tranh không thuộc loại đã chọn, rồi tính lại trái/phải xen kẽ theo các tranh còn hiện
+    let n = 0;
     rows!.querySelectorAll<HTMLElement>('.row').forEach((row) => {
       row.hidden = k !== 'all' && row.dataset.kind !== k;
+      if (!row.hidden) row.classList.toggle('flip', n++ % 2 === 1);
     });
     requestAnimationFrame(build);
   }));

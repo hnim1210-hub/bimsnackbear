@@ -79,7 +79,7 @@ section.block{padding-block:var(--s7) var(--s6)}
 .chip:hover{border-color:var(--ink)}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
-/* Con đường tác phẩm. DOM luôn: ảnh → điểm neo → chữ; hàng chẵn đổi bên bằng CSS. */
+/* Con đường tác phẩm. DOM luôn: ảnh → điểm neo → chữ; hàng có class .flip (tính theo các tranh đang hiện) đổi bên. */
 .trail{position:relative}
 .trail svg.path{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
 .trail .ghost{fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:2 9;stroke-linecap:round}
@@ -98,9 +98,9 @@ section.block{padding-block:var(--s7) var(--s6)}
 .row .media:hover img{transform:scale(1.035)}
 .row .node{grid-column:2;grid-row:1;justify-self:center;align-self:center;width:1px;height:1px}
 .row .panel{grid-column:3;grid-row:1;display:flex;flex-direction:column;gap:var(--s3);max-width:46ch}
-.row:nth-child(even) .media{grid-column:3;justify-self:start}
-.row:nth-child(even) .panel{grid-column:1;justify-self:end;text-align:right}
-.row:nth-child(even) .panel .more{align-self:flex-end}
+.row.flip .media{grid-column:3;justify-self:start}
+.row.flip .panel{grid-column:1;justify-self:end;text-align:right}
+.row.flip .panel .more{align-self:flex-end}
 .row h3{font-size:clamp(24px,2.6vw,34px)}
 .row h3 a{text-decoration:none}
 .row h3 a:hover{color:var(--son)}
@@ -180,16 +180,16 @@ dl.facts dd{margin:0}
   .js .hero .portrait img{animation:inkL 1.3s .35s cubic-bezier(.6,.05,.3,1) both}
   /* Mực loang TỪ PHÍA CON ĐƯỜNG ra ngoài: ảnh bên trái quét phải→trái (inkR), ảnh bên phải inkL */
   .js .row:not(.in) .media{clip-path:polygon(100% 0,106% 0,103% 11%,108% 22%,102% 33%,107% 44%,104% 55%,109% 66%,105% 77%,103% 88%,106% 100%,100% 100%)}
-  .js .row:nth-child(even):not(.in) .media{clip-path:polygon(0 0,-6% 0,-3% 11%,-8% 22%,-2% 33%,-7% 44%,-4% 55%,-9% 66%,-5% 77%,-3% 88%,-6% 100%,0 100%)}
+  .js .row.flip:not(.in) .media{clip-path:polygon(0 0,-6% 0,-3% 11%,-8% 22%,-2% 33%,-7% 44%,-4% 55%,-9% 66%,-5% 77%,-3% 88%,-6% 100%,0 100%)}
   .js .row.in .media{animation:inkR 1.2s .15s cubic-bezier(.6,.05,.3,1) both}
-  .js .row.in:nth-child(even) .media{animation-name:inkL}
+  .js .row.in.flip .media{animation-name:inkL}
   .js .row:not(.in) .panel{opacity:0}
   .js .row.in .panel{animation:outR .8s .35s var(--ease) both}
-  .js .row.in:nth-child(even) .panel{animation-name:outL}
+  .js .row.in.flip .panel{animation-name:outL}
   @supports (animation-timeline: view()){
-    .js .row:not(.in) .media,.js .row:nth-child(even):not(.in) .media{clip-path:none}
+    .js .row:not(.in) .media,.js .row.flip:not(.in) .media{clip-path:none}
     .js .row .media,.js .row.in .media{animation:inkR linear both;animation-timeline:view();animation-range:entry 5% cover 40%}
-    .js .row:nth-child(even) .media,.js .row.in:nth-child(even) .media{animation-name:inkL}
+    .js .row.flip .media,.js .row.in.flip .media{animation-name:inkL}
   }
   .js .portrait{transition:transform .8s var(--ease)}
   .js .portrait:hover{transform:rotate(0deg) scale(1.01)}
@@ -212,10 +212,10 @@ dl.facts dd{margin:0}
   .rows{gap:var(--s6)}
   /* Con đường chạy mép trái; ảnh rồi chữ nằm bên phải đường */
   .row{grid-template-columns:48px minmax(0,1fr);column-gap:var(--s3);align-items:start}
-  .row .node,.row:nth-child(even) .node{grid-column:1;grid-row:1;align-self:start;margin-top:var(--s3)}
-  .row .media,.row:nth-child(even) .media,.row .media.tall{grid-column:2;grid-row:1;width:100%;justify-self:stretch}
-  .row .panel,.row:nth-child(even) .panel{grid-column:2;grid-row:2;justify-self:stretch;text-align:left;padding-top:var(--s4);max-width:none}
-  .row:nth-child(even) .panel .more{align-self:flex-start}
+  .row .node,.row.flip .node{grid-column:1;grid-row:1;align-self:start;margin-top:var(--s3)}
+  .row .media,.row.flip .media,.row .media.tall{grid-column:2;grid-row:1;width:100%;justify-self:stretch}
+  .row .panel,.row.flip .panel{grid-column:2;grid-row:2;justify-self:stretch;text-align:left;padding-top:var(--s4);max-width:none}
+  .row.flip .panel .more{align-self:flex-start}
   .trail-end{text-align:left;padding-left:64px}
   .gallery figure.l,.gallery figure.r{grid-column:1/13;margin-top:0}
   nav ul{gap:var(--s3)}
@@ -224,12 +224,12 @@ dl.facts dd{margin:0}
   .brand b{display:none}
 }
 @media (max-width:760px) and (prefers-reduced-motion:no-preference){
-  .js .row:not(.in) .media,.js .row:nth-child(even):not(.in) .media{clip-path:polygon(0 0,-6% 0,-3% 11%,-8% 22%,-2% 33%,-7% 44%,-4% 55%,-9% 66%,-5% 77%,-3% 88%,-6% 100%,0 100%)}
-  .js .row.in .media,.js .row.in:nth-child(even) .media{animation-name:inkL}
-  .js .row.in .panel,.js .row.in:nth-child(even) .panel{animation-name:fadeUp}
+  .js .row:not(.in) .media,.js .row.flip:not(.in) .media{clip-path:polygon(0 0,-6% 0,-3% 11%,-8% 22%,-2% 33%,-7% 44%,-4% 55%,-9% 66%,-5% 77%,-3% 88%,-6% 100%,0 100%)}
+  .js .row.in .media,.js .row.in.flip .media{animation-name:inkL}
+  .js .row.in .panel,.js .row.in.flip .panel{animation-name:fadeUp}
   @supports (animation-timeline: view()){
-    .js .row:not(.in) .media,.js .row:nth-child(even):not(.in) .media{clip-path:none}
-    .js .row .media,.js .row:nth-child(even) .media,.js .row.in .media,.js .row.in:nth-child(even) .media{animation-name:inkL}
+    .js .row:not(.in) .media,.js .row.flip:not(.in) .media{clip-path:none}
+    .js .row .media,.js .row.flip .media,.js .row.in .media,.js .row.in.flip .media{animation-name:inkL}
   }
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.row .media img{transition:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}

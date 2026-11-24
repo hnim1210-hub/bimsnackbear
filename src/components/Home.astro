@@ -55,7 +55,7 @@ const title = `${p.name.vi} · ${p.name.en}`;
           </svg>
           <div class="rows" id="rows">
             {works.map((w, i) => (
-              <article class="row" data-kind={w.kind}>
+              <article class:list={["row", { flip: i % 2 === 1 }]} data-kind={w.kind}>
                 <a class:list={['media', { tall: w.cover.height > w.cover.width * 1.05 }]} href={workUrl(lang, w.slug)} aria-label={u.viewWork(w.title[lang])}>
                   <Image src={w.cover} alt={w.title[lang]} widths={[400, 700, 1000, 1300]} sizes="(max-width: 760px) 85vw, 540px" loading={i < 2 ? 'eager' : 'lazy'} style={`view-transition-name:vt-${w.slug}`} />
                   {w.images.length > 1 && <span class="count">{u.images(w.images.length)}</span>}
