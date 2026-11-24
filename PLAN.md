@@ -9,7 +9,7 @@ liên hệ ở cuối. Song ngữ Việt/Anh. Chủ kho tự thêm tranh, tải 
 |---|---|---|
 | Dựng web | Astro 7 (trang tĩnh) | Nhanh, tự tối ưu ảnh (WebP, nhiều cỡ), không cần máy chủ |
 | Quản trị | Sveltia CMS 0.271 | Miễn phí; kéo-thả thứ tự (`reorder: true`); nhiều ảnh/tác phẩm; tự nén ảnh khi tải lên; hỗ trợ điện thoại |
-| Đăng nhập CMS | Chìa khoá GitHub (fine-grained token) | Không cần máy chủ OAuth; có thể nâng cấp sau |
+| Đăng nhập CMS | Sveltia CMS Additions (Cloudflare Worker) | Tài khoản tên + mật khẩu, không cần chép chìa khoá; miễn phí |
 | Lưu trữ + đăng web | GitHub (kho riêng) + Cloudflare Pages | Miễn phí; mỗi lần lưu trong CMS là web tự cập nhật |
 | Địa chỉ | `bimsnackbear.pages.dev` | Miễn phí; gắn tên miền riêng sau không phải làm lại |
 
@@ -24,6 +24,6 @@ liên hệ ở cuối. Song ngữ Việt/Anh. Chủ kho tự thêm tranh, tải 
 - [x] Trang chi tiết: thông tin (khách đặt chỉ với tranh đặt), bộ ảnh, xem ảnh lớn (phím ←/→, vuốt, Esc)
 - [x] Ảnh tự tối ưu; không tràn ngang ở 1280px và điện thoại; không lỗi console
 - [x] /admin: cấu hình hợp lệ theo schema chính thức của Sveltia; hiện màn hình đăng nhập
-- [ ] Kết nối Cloudflare Pages (chủ kho làm, ~5 phút) → web chạy ở `bimsnackbear.pages.dev`
-- [ ] Chủ kho tạo chìa khoá GitHub, đăng nhập /admin, thử thêm 1 tranh thật
+- [x] Kết nối Cloudflare Pages
+- [ ] Chủ kho chạy trình cài đặt Additions, đăng nhập /admin, thử thêm 1 tranh thật
 - [ ] Thay nội dung mẫu bằng nội dung thật

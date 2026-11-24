@@ -3,12 +3,12 @@
 Web gallery của hoạ sĩ minh hoạ **Hoàng Ngân** (Bim · SnacK Bear): tranh sáng tác và tranh đặt,
 hai thứ tiếng Việt / Anh, xếp dọc theo một con đường đỏ son.
 
-- Web: `https://bimsnackbear.pages.dev` (sau khi kết nối Cloudflare Pages)
+- Web: `https://bimsnackbear.pages.dev`
 - Trang quản trị: `https://bimsnackbear.pages.dev/admin`
 
 ## Quản lý nội dung (không cần biết code)
 
-1. Mở **/admin** trên máy tính hoặc điện thoại → **Sign In Using Access Token** → dán "chìa khoá" GitHub (xem dưới).
+1. Mở **/admin** trên máy tính hoặc điện thoại → đăng nhập bằng **tên + mật khẩu** tài khoản quản trị.
 2. **Tác phẩm**: thêm / sửa / xoá tranh; tải ảnh đại diện và nhiều ảnh chi tiết (ảnh tự nén sang WebP, tối đa 2400px).
 3. **Sắp thứ tự**: trong danh sách Tác phẩm, bấm nút sắp xếp (Reorder) rồi kéo-thả.
 4. **Giới thiệu & Liên hệ**: nghệ danh, chữ trên con dấu, câu tuyên ngôn, giới thiệu, ảnh chân dung, email, mạng xã hội.
@@ -19,14 +19,20 @@ Mẹo nhập chữ:
 - Giới thiệu: cách một dòng trống để tách đoạn.
 - Ô tiếng Anh bỏ trống thì bản tiếng Anh dùng chữ tiếng Việt.
 
-### Tạo "chìa khoá" GitHub để đăng nhập trang quản trị (làm 1 lần mỗi năm)
+### Đăng nhập trang quản trị (Sveltia CMS Additions)
 
-GitHub → ảnh đại diện → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens**
-→ **Generate new token**:
-- Token name: `Quan tri web Bim`; Expiration: tối đa cho phép.
-- Repository access: **Only select repositories** → `bimsnackbear`.
-- Permissions → Repository permissions → **Contents: Read and write**.
-- Generate → chép chuỗi `github_pat_…`, dán vào trang /admin. Không gửi chìa khoá này cho ai.
+"Phòng bảo vệ" chạy miễn phí trên Cloudflare: Worker `bim-admin` (`https://bim-admin.hnim1210.workers.dev`),
+mã nguồn ở một kho riêng do nút Deploy tạo. Nó giữ danh sách tài khoản và thay mặt mọi người ghi vào kho này
+qua một GitHub App chỉ được cài cho kho `bimsnackbear`.
+
+- **Lần đầu**: mở /admin → **Use Admin Secret** → dán `ADMIN_SECRET` (đã lưu trong trình quản lý mật khẩu)
+  → tạo tài khoản quản trị → đăng ký GitHub App, cài **Only select repositories** → `bimsnackbear`.
+- **Hằng ngày**: đăng nhập bằng tên + mật khẩu tài khoản quản trị.
+- **Thêm người** (trợ lý…): Administration → Users.
+- **Quên mật khẩu**: /admin → Use Admin Secret → Reset Admin Password.
+- **Mất `ADMIN_SECRET`**: đặt cái mới trong Cloudflare (Worker `bim-admin` → Settings → Variables and Secrets),
+  mở trình cài đặt bằng nó → Start Over (giữ mật khẩu, phải cài lại khoá của GitHub App).
+- **Cập nhật**: khi GitHub mở đề xuất (pull request) cập nhật trong kho của Worker, bấm Merge.
 
 ## Cấu trúc
 

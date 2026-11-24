@@ -5,8 +5,10 @@ backend:
   name: github
   repo: hnim1210-hub/bimsnackbear
   branch: main
-  # Đăng nhập bằng "chìa khoá" GitHub (personal access token). Không cần máy chủ riêng.
-  auth_methods: [token]
+  # Đăng nhập qua Sveltia CMS Additions (Cloudflare Worker "bim-admin"): tài khoản riêng
+  # (tên + mật khẩu, không cần GitHub) do quản trị viên tạo trong mục Administration.
+  auth_type: additions
+  base_url: https://bim-admin.hnim1210.workers.dev
 
 app_title: Quản trị · Bim
 site_url: https://bimsnackbear.pages.dev

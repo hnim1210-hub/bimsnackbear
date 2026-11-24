@@ -4,7 +4,9 @@
 
 ## Đã có ✅
 - Web Astro song ngữ (vi/en): giới thiệu đầu trang, con đường tác phẩm, trang chi tiết + xem ảnh lớn, liên hệ.
-- Trang quản trị Sveltia CMS tại `/admin` (đăng nhập bằng chìa khoá GitHub), kéo-thả thứ tự, tải nhiều ảnh, tự nén WebP.
+- Trang quản trị Sveltia CMS tại `/admin`, kéo-thả thứ tự, tải nhiều ảnh, tự nén WebP.
+- Đăng nhập qua **Sveltia CMS Additions** (Worker `bim-admin.hnim1210.workers.dev`): tài khoản riêng tên + mật khẩu.
+- Web chạy trên Cloudflare **Pages**: `bimsnackbear.pages.dev`.
 - Nội dung **mẫu**: 6 tác phẩm `mau-*` (3 sáng tác, 3 tranh đặt) + giới thiệu có chữ trong [ngoặc vuông] → chủ kho thay/xoá trong /admin.
 
 ## Quyết định đã chốt
@@ -13,10 +15,11 @@
 - Không hiển thị năm trên con đường; năm chỉ ở trang chi tiết.
 
 ## Việc tiếp theo ⏭️
-1. Chủ kho kết nối Cloudflare Pages với kho (hướng dẫn trong `README.md`).
-2. Chủ kho tạo chìa khoá GitHub, đăng nhập /admin, thay nội dung mẫu.
-3. (Tuỳ chọn) Đăng nhập một chạm: Cloudflare Worker `sveltia-cms-auth` thay cho chìa khoá.
-4. (Tuỳ chọn) Tên miền riêng `bimsnackbear.com`; khi đổi, sửa `site` trong `astro.config.mjs` và `site_url` trong `public/admin/config.yml`.
+1. Chủ kho chạy trình cài đặt Additions (Use Admin Secret → tạo admin → cài GitHub App cho `bimsnackbear`).
+2. Danh sách an toàn của Additions: bật 2FA Cloudflare + GitHub; thêm ruleset chặn force push/xoá trên `main` của kho này.
+3. Xoá dự án Worker cũ `bimsnackbear` (bản tạo nhầm, `bimsnackbear.hnim1210.workers.dev`) nếu còn.
+4. Chủ kho thay nội dung mẫu (`mau-*`) bằng nội dung thật.
+5. (Tuỳ chọn) Tên miền riêng `bimsnackbear.com`; khi đổi, sửa `site` trong `astro.config.mjs` và `site_url` trong `public/admin/config.yml`.
 
 ## Vấn đề đã biết ⚠️
 | Vấn đề | Cách xử lý |

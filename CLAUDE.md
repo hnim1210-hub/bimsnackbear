@@ -8,7 +8,7 @@ Người dùng nói tiếng Việt; trả lời bằng tiếng Việt, giải th
 - `TIEN-DO.md`: hiện trạng hệ thống, quyết định đã chốt, việc tiếp theo. Đọc trước khi làm, sửa cho đúng hiện trạng sau khi xong
   (không viết nhật ký; lịch sử chi tiết xem `git log`).
 - `PLAN.md`: kế hoạch và tiêu chí hoàn thành của bản đầu.
-- `README.md`: hướng dẫn cho chủ kho (quản lý nội dung, chìa khoá đăng nhập, Cloudflare).
+- `README.md`: hướng dẫn cho chủ kho (quản lý nội dung, đăng nhập trang quản trị, Cloudflare).
 
 ## Luật
 
