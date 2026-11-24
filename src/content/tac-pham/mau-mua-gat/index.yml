@@ -1,0 +1,13 @@
+title_vi: "[Mẫu] Mùa gặt"
+title_en: "[Sample] Harvest season"
+loai: sang-tac
+nam: 2023
+chat_lieu_vi: "Màu nước"
+chat_lieu_en: "Watercolour"
+mo_ta_vi: "[Mô tả mẫu.]"
+mo_ta_en: "[Sample description.]"
+anh_dai_dien: anh-dai-dien.webp
+anh_chi_tiet:
+  - chi-tiet-1.webp
+  - chi-tiet-2.webp
+order: 3

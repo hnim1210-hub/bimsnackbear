@@ -1,0 +1,15 @@
+title_vi: "[Mẫu] Thiệp Tết"
+title_en: "[Sample] Lunar New Year cards"
+loai: tranh-dat
+khach_hang: "[Tên khách hàng]"
+nam: 2026
+chat_lieu_vi: "Khắc gỗ kỹ thuật số"
+chat_lieu_en: "Digital woodcut"
+mo_ta_vi: "[Mô tả mẫu: khách cần gì, bạn vẽ thế nào.]"
+mo_ta_en: "[Sample description: what the client needed and how you drew it.]"
+anh_dai_dien: anh-dai-dien.webp
+anh_chi_tiet:
+  - chi-tiet-1.webp
+  - chi-tiet-2.webp
+  - chi-tiet-3.webp
+order: 2

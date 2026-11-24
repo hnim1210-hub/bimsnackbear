@@ -1,0 +1,15 @@
+title_vi: "[Mẫu] Phố cũ"
+title_en: "[Sample] Old Quarter"
+loai: sang-tac
+nam: 2025
+chat_lieu_vi: "Mực tàu, son"
+chat_lieu_en: "Ink and cinnabar"
+mo_ta_vi: "[Mô tả mẫu: cảm hứng và câu chuyện phía sau bộ tranh. Thay bằng mô tả thật trong trang quản trị.]"
+mo_ta_en: "[Sample description: the inspiration and story behind the series. Replace it in the admin page.]"
+anh_dai_dien: anh-dai-dien.webp
+anh_chi_tiet:
+  - chi-tiet-1.webp
+  - chi-tiet-2.webp
+  - chi-tiet-3.webp
+  - chi-tiet-4.webp
+order: 1

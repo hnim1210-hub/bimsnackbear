@@ -1,0 +1,14 @@
+title_vi: "[Mẫu] Tranh bao bì trà"
+title_en: "[Sample] Tea packaging artwork"
+loai: tranh-dat
+khach_hang: "[Tên khách hàng]"
+nam: 2024
+chat_lieu_vi: "Vẽ số, mô phỏng in lụa"
+chat_lieu_en: "Digital, screen-print style"
+mo_ta_vi: "[Mô tả mẫu.]"
+mo_ta_en: "[Sample description.]"
+anh_dai_dien: anh-dai-dien.webp
+anh_chi_tiet:
+  - chi-tiet-1.webp
+  - chi-tiet-2.webp
+order: 6

@@ -1,0 +1,79 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { getProfile, getWorks, type Lang, type Work } from '../lib/content';
+import { t, home, workUrl } from '../lib/i18n';
+
+interface Props { lang: Lang; work: Work }
+const { lang, work: w } = Astro.props;
+const u = t(lang);
+const p = getProfile();
+const works = getWorks();
+const next = works[(works.indexOf(w) + 1) % works.length];
+// Ảnh lớn cho khung xem ảnh (WebP, cạnh dài tối đa 2000px)
+const full = await Promise.all(
+  w.images.map((img) => getImage({ src: img, width: Math.min(img.width, 2000), format: 'webp' })),
+);
+const shape = (k: number) => ['w', 'l', 'r'][k % 3];
+const title = `${w.title[lang]} · ${p.name.vi} · ${p.name.en}`;
+---
+<Base lang={lang} title={title} description={w.description[lang] || undefined} altPath={workUrl(lang === 'vi' ? 'en' : 'vi', w.slug)} ogImage={full[0].src}>
+  <div class="wrap">
+    <div class="detail-bar">
+      <a class="btn ghost" href={`${home(lang)}#tac-pham`}>{u.back}</a>
+      <span class="label">{u.kind[w.kind]}{w.year ? ` · ${w.year}` : ''}</span>
+    </div>
+
+    <button type="button" class="d-hero" data-full={full[0].src} data-alt={w.title[lang]} aria-label={u.enlarge(1)}>
+      <Image src={w.cover} alt={w.title[lang]} widths={[700, 1200, 1800, 2400]} sizes="(max-width: 1240px) 100vw, 1208px" loading="eager" style={`view-transition-name:vt-${w.slug}`} />
+    </button>
+
+    <div class="g12 detail-head">
+      <div class="t">
+        <h1>{w.title[lang]}</h1>
+        {w.description[lang] && <p class="desc">{w.description[lang]}</p>}
+      </div>
+      <dl class="facts">
+        <div><dt>{u.fKind}</dt><dd>{u.kind[w.kind]}</dd></div>
+        {w.kind === 'tranh-dat' && w.client && <div><dt>{u.fClient}</dt><dd>{w.client}</dd></div>}
+        {w.year && <div><dt>{u.fYear}</dt><dd>{w.year}</dd></div>}
+        {w.medium[lang] && <div><dt>{u.fMedium}</dt><dd>{w.medium[lang]}</dd></div>}
+      </dl>
+    </div>
+
+    {w.images.length > 1 && (
+      <div class="g12 gallery">
+        {w.images.slice(1).map((img, k) => (
+          <figure class={shape(k)}>
+            <button type="button" data-full={full[k + 1].src} data-alt={`${w.title[lang]} ${k + 2}`} aria-label={u.enlarge(k + 2)}>
+              <Image src={img} alt={`${w.title[lang]} ${k + 2}`} widths={[500, 900, 1300, 1800]} sizes={shape(k) === 'w' ? '(max-width: 1240px) 100vw, 1208px' : '(max-width: 760px) 100vw, 700px'} />
+            </button>
+            <figcaption>{k + 2} / {w.images.length}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+
+    {works.length > 1 && (
+      <div class="next-proj">
+        <span class="label">{u.next}</span>
+        <a href={workUrl(lang, next.slug)}>{next.title[lang]} →</a>
+      </div>
+    )}
+  </div>
+
+  <div class="lightbox" id="lb" hidden role="dialog" aria-modal="true" aria-label={u.viewer}>
+    <div class="lb-top"><span>{w.title[lang]}</span><button class="btn ghost" type="button" data-close>{u.close}</button></div>
+    <div class="lb-stage"><img alt="" decoding="async" /></div>
+    <div class="lb-bot">
+      <button class="btn ghost" type="button" data-prev>{u.prev}</button>
+      <span data-counter style="font-variant-numeric:tabular-nums"></span>
+      <button class="btn ghost" type="button" data-next>{u.nextImg}</button>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { initLightbox } from '../scripts/lightbox';
+  initLightbox();
+</script>

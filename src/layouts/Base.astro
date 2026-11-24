@@ -1,0 +1,83 @@
+---
+import '@fontsource-variable/fraunces/full.css';
+import '@fontsource-variable/fraunces/full-italic.css';
+import '@fontsource/be-vietnam-pro/vietnamese-300.css';
+import '@fontsource/be-vietnam-pro/vietnamese-400.css';
+import '@fontsource/be-vietnam-pro/vietnamese-500.css';
+import '@fontsource/be-vietnam-pro/latin-300.css';
+import '@fontsource/be-vietnam-pro/latin-400.css';
+import '@fontsource/be-vietnam-pro/latin-500.css';
+import '../styles/global.css';
+import { getProfile, type Lang } from '../lib/content';
+import { t, home } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description?: string;
+  /** Đường dẫn của cùng trang ở ngôn ngữ kia (cho nút VI/EN) */
+  altPath: string;
+  ogImage?: string;
+}
+const { lang, title, description, altPath, ogImage } = Astro.props;
+const p = getProfile();
+const u = t(lang);
+const viPath = lang === 'vi' ? Astro.url.pathname : altPath;
+const enPath = lang === 'en' ? Astro.url.pathname : altPath;
+const site = Astro.site;
+const desc = description || p.seo[lang];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    {desc && <meta name="description" content={desc} />}
+    <meta name="theme-color" content="#FCFBF8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#171412" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {site && <link rel="canonical" href={new URL(Astro.url.pathname, site)} />}
+    {site && <link rel="alternate" hreflang="vi" href={new URL(viPath, site)} />}
+    {site && <link rel="alternate" hreflang="en" href={new URL(enPath, site)} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    {desc && <meta property="og:description" content={desc} />}
+    {ogImage && site && <meta property="og:image" content={new URL(ogImage, site)} />}
+    <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+  </head>
+  <body>
+    <a class="skip" href="#noi-dung">{lang === 'vi' ? 'Bỏ qua tới nội dung' : 'Skip to content'}</a>
+    <header class="top">
+      <div class="wrap">
+        <a class="brand" href={home(lang)} aria-label={u.toTop}>
+          <span class="seal" aria-hidden="true" set:html={p.seal.split('|').map((s) => s.trim()).join('<br>')} />
+          <b>{p.name.vi} · {p.name.en}</b>
+        </a>
+        <div class="top-right">
+          <nav aria-label={u.navLabel}>
+            <ul>
+              <li><a href={`${home(lang)}#gioi-thieu`}>{u.navAbout}</a></li>
+              <li><a href={`${home(lang)}#tac-pham`}>{u.navWorks}</a></li>
+              <li><a href={`${home(lang)}#lien-he`}>{u.navContact}</a></li>
+            </ul>
+          </nav>
+          <div class="lang" role="group" aria-label="Ngôn ngữ / Language">
+            <a href={viPath} hreflang="vi" lang="vi" aria-current={lang === 'vi' ? 'true' : undefined} title="Tiếng Việt">VI</a>
+            <a href={enPath} hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined} title="English">EN</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main id="noi-dung">
+      <slot />
+    </main>
+    <footer>
+      <div class="wrap">
+        <span>© {new Date().getFullYear()} {p.name[lang]}. {u.rights}</span>
+        <span>{u.madeBy}</span>
+      </div>
+    </footer>
+  </body>
+</html>

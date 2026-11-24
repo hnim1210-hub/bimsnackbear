@@ -1,0 +1,102 @@
+# Cấu hình trang quản trị (Sveltia CMS) — mở tại <địa-chỉ-web>/admin
+# Mỗi lần Lưu, CMS tạo một commit trên nhánh main → Cloudflare tự dựng lại web (khoảng 1–2 phút).
+
+backend:
+  name: github
+  repo: hnim1210-hub/bimsnackbear
+  branch: main
+  # Đăng nhập bằng "chìa khoá" GitHub (personal access token). Không cần máy chủ riêng.
+  auth_methods: [token]
+
+app_title: Quản trị · Bim
+site_url: https://bimsnackbear.pages.dev
+
+# Thư viện ảnh chung (ảnh tải lên ngoài một tác phẩm cụ thể). Ảnh của từng tác phẩm
+# nằm ngay trong thư mục của tác phẩm đó (xem media_folder trong collection bên dưới).
+media_folder: src/assets/thu-vien
+public_folder: /src/assets/thu-vien
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# Ảnh tải lên được tự nén thành WebP, cạnh dài tối đa 2400px.
+media_libraries:
+  default:
+    config:
+      max_file_size: 30000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2400
+          height: 2400
+
+collections:
+  - name: tac-pham
+    label: Tác phẩm
+    label_singular: tác phẩm
+    description: Kéo-thả để sắp thứ tự hiện trên trang (bấm nút sắp xếp ở thanh trên danh sách).
+    folder: src/content/tac-pham
+    path: "{{slug}}/index"
+    format: yaml
+    extension: yml
+    media_folder: ""
+    public_folder: ""
+    identifier_field: title_vi
+    slug: "{{fields.title_vi}}"
+    summary: "{{title_vi}} · {{loai}}"
+    reorder: true
+    create: true
+    delete: true
+    fields:
+      - { name: title_vi, label: "Tên tranh (Tiếng Việt)", widget: string }
+      - { name: title_en, label: "Tên tranh (English)", widget: string, required: false, hint: "Bỏ trống thì bản tiếng Anh dùng tên tiếng Việt." }
+      - name: loai
+        label: Loại tranh
+        widget: select
+        default: sang-tac
+        options:
+          - { label: "Tranh sáng tác", value: sang-tac }
+          - { label: "Tranh đặt", value: tranh-dat }
+      - { name: khach_hang, label: "Khách đặt", widget: string, required: false, hint: "Chỉ điền với tranh đặt. Bỏ trống nếu không muốn ghi tên khách." }
+      - { name: nam, label: "Năm sáng tác", widget: number, value_type: int, required: false }
+      - { name: chat_lieu_vi, label: "Chất liệu (Tiếng Việt)", widget: string, required: false, hint: "Ví dụ: Màu nước trên giấy dó" }
+      - { name: chat_lieu_en, label: "Chất liệu (English)", widget: string, required: false, hint: "Ví dụ: Watercolour on dó paper" }
+      - { name: mo_ta_vi, label: "Mô tả (Tiếng Việt)", widget: text, required: false }
+      - { name: mo_ta_en, label: "Mô tả (English)", widget: text, required: false }
+      - { name: anh_dai_dien, label: "Ảnh đại diện", widget: image, hint: "Ảnh hiện trên con đường và đầu trang chi tiết." }
+      - { name: anh_chi_tiet, label: "Ảnh chi tiết", widget: image, multiple: true, required: false, hint: "Chọn nhiều ảnh cùng lúc được. Kéo để đổi thứ tự ảnh." }
+
+  - name: trang
+    label: Giới thiệu & Liên hệ
+    files:
+      - name: thong-tin
+        label: Giới thiệu & Liên hệ
+        file: src/data/thong-tin.yml
+        format: yaml
+        media_folder: ""
+        public_folder: ""
+        fields:
+          - { name: nghe_danh_vi, label: "Nghệ danh (Tiếng Việt)", widget: string }
+          - { name: nghe_danh_en, label: "Nghệ danh (English)", widget: string }
+          - { name: con_dau, label: "Chữ trên con dấu", widget: string, hint: "Ngắn, 2–4 ký tự là đẹp nhất. Dùng | để xuống dòng." }
+          - { name: vai_tro_vi, label: "Dòng nhỏ trên tiêu đề (Tiếng Việt)", widget: string }
+          - { name: vai_tro_en, label: "Dòng nhỏ trên tiêu đề (English)", widget: string }
+          - { name: tieu_de_vi, label: "Câu tuyên ngôn (Tiếng Việt)", widget: text, hint: "Mỗi dòng là một dòng trên trang. Đặt chữ giữa hai dấu * để tô đỏ nghiêng, ví dụ: câu chuyện *văn hoá Việt*" }
+          - { name: tieu_de_en, label: "Câu tuyên ngôn (English)", widget: text }
+          - { name: gioi_thieu_vi, label: "Giới thiệu (Tiếng Việt)", widget: text, hint: "Cách một dòng trống để tách đoạn." }
+          - { name: gioi_thieu_en, label: "Giới thiệu (English)", widget: text }
+          - { name: anh_chan_dung, label: "Ảnh chân dung", widget: image }
+          - { name: chu_thich_anh_vi, label: "Chú thích ảnh chân dung (Tiếng Việt)", widget: string, required: false }
+          - { name: chu_thich_anh_en, label: "Chú thích ảnh chân dung (English)", widget: string, required: false }
+          - { name: cau_hoi_vi, label: "Câu mời ở phần Liên hệ (Tiếng Việt)", widget: string, hint: "Dùng * để tô đỏ nghiêng." }
+          - { name: cau_hoi_en, label: "Câu mời ở phần Liên hệ (English)", widget: string }
+          - { name: trang_thai_vi, label: "Trạng thái nhận tranh (Tiếng Việt)", widget: string, required: false }
+          - { name: trang_thai_en, label: "Trạng thái nhận tranh (English)", widget: string, required: false }
+          - { name: email, label: "Email", widget: string }
+          - { name: instagram, label: "Instagram (đường dẫn đầy đủ)", widget: string, required: false, hint: "Ví dụ: https://instagram.com/ten-cua-ban" }
+          - { name: behance, label: "Behance (đường dẫn đầy đủ)", widget: string, required: false }
+          - { name: dien_thoai, label: "Điện thoại", widget: string, required: false }
+          - { name: mo_ta_seo_vi, label: "Mô tả ngắn khi chia sẻ link (Tiếng Việt)", widget: string, required: false, hint: "Hiện khi gửi link web qua Messenger, Zalo, Facebook." }
+          - { name: mo_ta_seo_en, label: "Mô tả ngắn khi chia sẻ link (English)", widget: string, required: false }

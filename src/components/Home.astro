@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { getProfile, getWorks, emphasize, lines, paragraphs, type Lang } from '../lib/content';
+import { t, home, workUrl } from '../lib/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const p = getProfile();
+const works = getWorks();
+const u = t(lang);
+const kinds = (['sang-tac', 'tranh-dat'] as const).filter((k) => works.some((w) => w.kind === k));
+const headline = lines(p.headline[lang]);
+const bio = paragraphs(p.bio[lang]);
+const title = `${p.name.vi} · ${p.name.en}`;
+---
+<Base lang={lang} title={title} altPath={home(lang === 'vi' ? 'en' : 'vi')} ogImage={works[0]?.cover.src}>
+  <section class="hero" id="gioi-thieu" aria-label={u.navAbout}>
+    <div class="wrap g12">
+      <div class="vlabel" aria-hidden="true">{lang === 'vi' ? 'Mộc · Mực · Son' : 'Wood · Ink · Cinnabar'}</div>
+      <div class="copy">
+        {p.role[lang] && <p class="label" style="margin:0 0 var(--s3)">{p.role[lang]}</p>}
+        <h1>{headline.map((l) => <span class="ln"><span set:html={emphasize(l)} /></span>)}</h1>
+        <div class="lead">{bio.map((para) => <p>{para}</p>)}</div>
+        {kinds.length > 0 && <div class="hero-meta">{kinds.map((k) => <span>{u.kind[k]}</span>)}</div>}
+      </div>
+      {p.portrait && (
+        <figure>
+          <div class="portrait">
+            <Image src={p.portrait} alt={p.portraitCaption[lang] || p.name[lang]} widths={[360, 540, 720]} sizes="(max-width: 760px) 60vw, 300px" loading="eager" />
+            <span class="seal" aria-hidden="true" set:html={p.seal.split('|').map((s) => s.trim()).join('<br>')} />
+          </div>
+          {p.portraitCaption[lang] && <figcaption>{p.portraitCaption[lang]}</figcaption>}
+        </figure>
+      )}
+    </div>
+  </section>
+
+  <section class="block" id="tac-pham" aria-labelledby="h-tac-pham">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="h-tac-pham">{u.works}</h2>
+        {kinds.length > 1 && (
+          <div class="filters" role="group" aria-label={u.filterLabel}>
+            <button class="chip" type="button" data-kind="all" aria-pressed="true">{u.all}</button>
+            {kinds.map((k) => <button class="chip" type="button" data-kind={k} aria-pressed="false">{u.kind[k]}</button>)}
+          </div>
+        )}
+      </div>
+      {works.length === 0 ? <p class="empty">{u.empty}</p> : (
+        <div class="trail" id="trail">
+          <svg class="path" aria-hidden="true">
+            <path class="ghost" /><path class="draw" /><g class="stops" />
+            <g class="plane" transform="translate(-40 -40)"><path d="M24 0 L-20 -16 L-14 4 Z" /><path d="M24 0 L-14 4 L-8 18 Z" /><path d="M24 0 L-10 9" /></g>
+          </svg>
+          <div class="rows" id="rows">
+            {works.map((w, i) => (
+              <article class="row" data-kind={w.kind}>
+                <a class:list={['media', { tall: w.cover.height > w.cover.width * 1.05 }]} href={workUrl(lang, w.slug)} aria-label={u.viewWork(w.title[lang])}>
+                  <Image src={w.cover} alt={w.title[lang]} widths={[400, 700, 1000, 1300]} sizes="(max-width: 760px) 85vw, 540px" loading={i < 2 ? 'eager' : 'lazy'} style={`view-transition-name:vt-${w.slug}`} />
+                  {w.images.length > 1 && <span class="count">{u.images(w.images.length)}</span>}
+                </a>
+                <div class="node" aria-hidden="true"></div>
+                <div class="panel">
+                  <div class="label">{u.kind[w.kind]}</div>
+                  <h3><a href={workUrl(lang, w.slug)}>{w.title[lang]}</a></h3>
+                  {w.medium[lang] && <span class="medium">{w.medium[lang]}</span>}
+                  {w.description[lang] && <p class="desc">{w.description[lang]}</p>}
+                  <a class="more" href={workUrl(lang, w.slug)}>{u.viewN(w.images.length)}</a>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p class="trail-end label" id="trail-end"><span>{u.trailEnd}</span></p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="block" id="lien-he" aria-labelledby="h-lien-he">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="h-lien-he">{u.contact}</h2><span class="label">{u.collab}</span></div>
+      <div class="g12 contact">
+        <div class="say">
+          <h2 class="big" set:html={emphasize(p.ask[lang])} />
+          {p.status[lang] && <div class="status"><i aria-hidden="true"></i><span>{p.status[lang]}</span></div>}
+        </div>
+        <ul class="links">
+          <li>
+            <span>Email</span>
+            <a class="val" id="email" href={`mailto:${p.email}`}>{p.email}</a>
+            <button class="btn" id="copy" type="button" data-copy={u.copy} data-copied={u.copied} data-selected={u.selected}>{u.copy}</button>
+          </li>
+          {p.instagram && <li><span>Instagram</span><span class="val">{p.instagram.replace(/^https?:\/\/(www\.)?/, '')}</span><a class="btn ghost" href={p.instagram} target="_blank" rel="noopener">{u.open}</a></li>}
+          {p.behance && <li><span>Behance</span><span class="val">{p.behance.replace(/^https?:\/\/(www\.)?/, '')}</span><a class="btn ghost" href={p.behance} target="_blank" rel="noopener">{u.open}</a></li>}
+          {p.phone && <li><span>{u.phone}</span><a class="val" href={`tel:${p.phone.replace(/\s/g, '')}`}>{p.phone}</a><span></span></li>}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { initTrail } from '../scripts/trail';
+  import { initCopy } from '../scripts/copy';
+  initTrail();
+  initCopy();
+</script>

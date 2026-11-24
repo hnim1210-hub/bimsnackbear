@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+public/admin/sveltia-cms.js
+.DS_Store
+.env
+public/admin/chunks/
