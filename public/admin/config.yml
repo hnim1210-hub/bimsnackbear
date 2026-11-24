@@ -11,6 +11,9 @@ backend:
   base_url: https://bim-admin.hnim1210.workers.dev
 
 app_title: Quản trị · Bim
+# Logo con dấu ở trang đăng nhập, thanh trên cùng và biểu tượng tab trình duyệt
+logo:
+  src: /admin/logo.svg
 site_url: https://bimsnackbear.pages.dev
 
 # Thư viện ảnh chung (ảnh tải lên ngoài một tác phẩm cụ thể). Ảnh của từng tác phẩm
@@ -38,7 +41,8 @@ collections:
   - name: tac-pham
     label: Tác phẩm
     label_singular: tác phẩm
-    description: Kéo-thả để sắp thứ tự hiện trên trang (bấm nút sắp xếp ở thanh trên danh sách).
+    icon: palette
+    description: Tranh sáng tác và tranh đặt. Muốn đổi thứ tự trên con đường, bấm nút sắp xếp ở thanh trên danh sách rồi kéo-thả.
     folder: src/content/tac-pham
     path: "{{slug}}/index"
     format: yaml
@@ -49,10 +53,12 @@ collections:
     slug: "{{fields.title_vi}}"
     summary: "{{title_vi}} · {{loai}}"
     reorder: true
+    # Nút "Xem trên web" mở đúng trang của tranh đang sửa
+    preview_path: tac-pham/{{slug}}/
     create: true
     delete: true
     fields:
-      - { name: title_vi, label: "Tên tranh (Tiếng Việt)", widget: string }
+      - { name: title_vi, label: "Tên tranh (Tiếng Việt)", widget: string, hint: "Tên này cũng dùng làm đường dẫn của tranh, ví dụ /tac-pham/pho-cu/." }
       - { name: title_en, label: "Tên tranh (English)", widget: string, required: false, hint: "Bỏ trống thì bản tiếng Anh dùng tên tiếng Việt." }
       - name: loai
         label: Loại tranh
@@ -62,20 +68,22 @@ collections:
           - { label: "Tranh sáng tác", value: sang-tac }
           - { label: "Tranh đặt", value: tranh-dat }
       - { name: khach_hang, label: "Khách đặt", widget: string, required: false, hint: "Chỉ điền với tranh đặt. Bỏ trống nếu không muốn ghi tên khách." }
-      - { name: nam, label: "Năm sáng tác", widget: number, value_type: int, required: false }
+      - { name: nam, label: "Năm sáng tác", widget: number, value_type: int, required: false, hint: "Chỉ hiện ở trang chi tiết, không hiện trên con đường." }
       - { name: chat_lieu_vi, label: "Chất liệu (Tiếng Việt)", widget: string, required: false, hint: "Ví dụ: Màu nước trên giấy dó" }
       - { name: chat_lieu_en, label: "Chất liệu (English)", widget: string, required: false, hint: "Ví dụ: Watercolour on dó paper" }
-      - { name: mo_ta_vi, label: "Mô tả (Tiếng Việt)", widget: text, required: false }
+      - { name: mo_ta_vi, label: "Mô tả (Tiếng Việt)", widget: text, required: false, hint: "Trên con đường chỉ hiện 4 dòng đầu; trang chi tiết hiện đủ." }
       - { name: mo_ta_en, label: "Mô tả (English)", widget: text, required: false }
-      - { name: anh_dai_dien, label: "Ảnh đại diện", widget: image, hint: "Ảnh hiện trên con đường và đầu trang chi tiết." }
+      - { name: anh_dai_dien, label: "Ảnh đại diện", widget: image, hint: "Ảnh hiện trên con đường và đầu trang chi tiết. Nên dùng ảnh đẹp nhất của bộ tranh." }
       - { name: anh_chi_tiet, label: "Ảnh chi tiết", widget: image, multiple: true, required: false, hint: "Chọn nhiều ảnh cùng lúc được. Kéo để đổi thứ tự ảnh." }
 
   - name: trang
     label: Giới thiệu & Liên hệ
+    icon: person
     files:
       - name: thong-tin
         label: Giới thiệu & Liên hệ
         file: src/data/thong-tin.yml
+        preview_path: ""
         format: yaml
         media_folder: ""
         public_folder: ""

@@ -14,6 +14,9 @@ hai thứ tiếng Việt / Anh, xếp dọc theo một con đường đỏ son.
 4. **Giới thiệu & Liên hệ**: nghệ danh, chữ trên con dấu, câu tuyên ngôn, giới thiệu, ảnh chân dung, email, mạng xã hội.
 5. Bấm **Lưu (Save)** → khoảng 1–2 phút sau web tự cập nhật.
 
+Khi sửa, khung **Xem trước** bên phải hiện nội dung đúng kiểu trình bày trên web (thẻ trên con đường, trang chi tiết,
+bản tiếng Anh; đầu trang và phần Liên hệ). Nút **Xem trên web** mở trang thật của tranh đang sửa.
+
 Mẹo nhập chữ:
 - Câu tuyên ngôn: mỗi dòng là một dòng trên trang; `*chữ*` để tô đỏ nghiêng.
 - Giới thiệu: cách một dòng trống để tách đoạn.
@@ -38,6 +41,8 @@ qua một GitHub App chỉ được cài cho kho `bimsnackbear`.
 
 ```
 public/admin/config.yml            cấu hình trang quản trị (Sveltia CMS)
+public/admin/preview.js|css       khung xem trước giống web trong trang quản trị
+public/admin/logo.svg              logo con dấu của trang quản trị
 src/content/tac-pham/<slug>/       mỗi tác phẩm 1 thư mục: index.yml + ảnh
 src/data/thong-tin.yml             giới thiệu & liên hệ (+ ảnh chân dung cùng thư mục)
 src/lib/content.ts                 đọc nội dung, kiểm tra ảnh

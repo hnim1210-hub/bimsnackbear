@@ -5,3 +5,4 @@ public/admin/sveltia-cms.js
 .DS_Store
 .env
 public/admin/chunks/
+public/admin/fonts/
