@@ -26,7 +26,8 @@ a{color:inherit}
 .g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--s4)}
 h1,h2,h3{font-family:var(--f-display);font-weight:450;font-variation-settings:"SOFT" 100;text-wrap:balance;margin:0;line-height:1.15}
 .label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
-.vlabel{writing-mode:vertical-rl;font-family:var(--f-display);font-size:15px;letter-spacing:.3em;color:var(--ink-soft);border-left:1px solid var(--son);padding-left:10px}
+/* Dòng chữ dọc: luôn một dòng (không xuống cột), đường đỏ bên cạnh dài đúng bằng chữ */
+.vlabel{writing-mode:vertical-rl;white-space:nowrap;font-family:var(--f-display);font-size:15px;letter-spacing:.3em;color:var(--ink-soft);border-left:1px solid var(--son);padding-left:10px;justify-self:start;align-self:start}
 .skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:16px;z-index:100;background:var(--paper);padding:8px 12px}
 
 /* Con dấu */
@@ -52,7 +53,7 @@ nav a:hover{border-color:var(--son)}
 /* Mở đầu bất đối xứng: giới thiệu + chân dung */
 .hero{padding-block:var(--s6) 0}
 .hero .g12{align-items:start}
-.hero .vlabel{grid-column:1;grid-row:1;height:200px;margin-top:var(--s3)}
+.hero .vlabel{grid-column:1;grid-row:1;margin-top:var(--s3)}
 .hero .copy{grid-column:2/9;grid-row:1}
 .hero h1{font-size:clamp(40px,6.6vw,92px);font-weight:400;letter-spacing:-.02em;line-height:1.08}
 .hero h1 em,.contact h2.big em{font-style:italic;color:var(--son)}
