@@ -67,7 +67,9 @@ nav a:hover{border-color:var(--son)}
 .hero figcaption{font-size:12px;color:var(--ink-soft);margin-top:var(--s3)}
 .portrait{aspect-ratio:3/4;max-width:100%;background:var(--paper-2);position:relative;transform:rotate(-2deg);
   border:10px solid var(--paper);box-shadow:0 1px 0 var(--line),0 18px 40px -24px color-mix(in srgb,var(--ink) 45%,transparent)}
-.portrait img{width:100%;height:100%;object-fit:cover}
+/* Lớp cắt riêng cho ảnh để con dấu vẫn lấn ra ngoài mép khung */
+.portrait .crop{position:absolute;inset:0;overflow:hidden}
+.portrait .crop img{width:100%;height:100%;object-fit:cover}
 .portrait .stamp{position:absolute;right:-22px;bottom:28px;transform:rotate(4deg)}
 .portrait .seal.stamp{width:56px;height:56px;font-size:15px}
 .logo-mark{display:block;object-fit:contain}
@@ -109,8 +111,8 @@ section.block{padding-block:var(--s7) var(--s6)}
 .row .medium{font-family:var(--f-display);font-style:italic;color:var(--ink-soft)}
 .row .desc{color:var(--ink-soft);font-size:15px;margin:0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .row .more{align-self:flex-start;font-size:14px;text-decoration:none;border-bottom:1px solid var(--son);padding-bottom:2px}
-/* Ảnh chuyển khi rê chuột: phủ lên ảnh đại diện, giữ nguyên khung */
-.row .media .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;pointer-events:none}
+/* Ảnh chuyển khi rê chuột: phủ lên ảnh đại diện, giữ nguyên khung và tỉ lệ gốc của từng ảnh (không cắt) */
+.row .media .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--paper-2);opacity:0;transition:opacity .45s ease;pointer-events:none}
 .row .media .slide.on{opacity:1}
 .row .count{z-index:1;position:absolute;left:10px;bottom:10px;background:var(--paper);font-size:12px;padding:2px 8px}
 .trail-end{text-align:center;margin:var(--s6) 0 0;position:relative;z-index:1}
@@ -182,7 +184,7 @@ dl.facts dd{margin:0}
   .js .hero .ln:nth-child(2)>span{animation-delay:.12s}
   .js .hero .ln:nth-child(3)>span{animation-delay:.24s}
   .js .hero .lead,.js .hero-meta{animation:fadeUp .8s .45s var(--ease) both}
-  .js .hero .portrait img{animation:inkL 1.3s .35s cubic-bezier(.6,.05,.3,1) both}
+  .js .hero .portrait .crop{animation:inkL 1.3s .35s cubic-bezier(.6,.05,.3,1) both}
   /* Mực loang TỪ PHÍA CON ĐƯỜNG ra ngoài: ảnh bên trái quét phải→trái (inkR), ảnh bên phải inkL */
   .js .row:not(.in) .media{clip-path:polygon(100% 0,106% 0,103% 11%,108% 22%,102% 33%,107% 44%,104% 55%,109% 66%,105% 77%,103% 88%,106% 100%,100% 100%)}
   .js .row.flip:not(.in) .media{clip-path:polygon(0 0,-6% 0,-3% 11%,-8% 22%,-2% 33%,-7% 44%,-4% 55%,-9% 66%,-5% 77%,-3% 88%,-6% 100%,0 100%)}

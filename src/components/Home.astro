@@ -13,6 +13,11 @@ const u = t(lang);
 const kinds = (['sang-tac', 'tranh-dat'] as const).filter((k) => works.some((w) => w.kind === k));
 const headline = lines(p.headline[lang]);
 const bio = paragraphs(p.bio[lang]);
+// Ảnh chân dung: giữ nguyên ảnh gốc, chỉ dời khung nhìn (vị trí + phóng to chỉnh trong trang quản trị).
+// Ảnh ngang phủ khung dọc 3:4 sẽ rộng hơn khung → báo trình duyệt cỡ thật để tải đủ nét.
+const pf = p.portraitFocus;
+const coverScale = p.portrait ? Math.max(1, (4 / 3) / (p.portrait.height / p.portrait.width)) * pf.zoom : 1;
+const portraitSizes = `(max-width: 760px) ${Math.ceil(60 * coverScale)}vw, ${Math.ceil(400 * coverScale)}px`;
 // Ảnh chuyển lần lượt khi rê chuột vào ảnh đại diện (WebP, rộng tối đa 1400px, chỉ tải khi rê chuột)
 const slides = await Promise.all(
   works.map((w) => Promise.all(w.images.slice(1).map(async (img) =>
@@ -33,7 +38,10 @@ const title = `${p.name.vi} · ${p.name.en}`;
       {p.portrait && (
         <figure>
           <div class="portrait">
-            <Image src={p.portrait} alt={p.portraitCaption[lang] || p.name[lang]} width={1200} height={1600} fit="cover" widths={[400, 600, 900, 1200]} sizes="(max-width: 760px) 60vw, 400px" quality={IMG_QUALITY} loading="eager" />
+            <div class="crop">
+              <Image src={p.portrait} alt={p.portraitCaption[lang] || p.name[lang]} widths={[400, 700, 1000, 1400, 1800, 2400]} sizes={portraitSizes} quality={IMG_QUALITY} loading="eager"
+                style={`object-position:${pf.x}% ${pf.y}%;transform-origin:${pf.x}% ${pf.y}%;${pf.zoom !== 1 ? `scale:${pf.zoom};` : ''}`} />
+            </div>
             <SealMark size={64} class="stamp" />
           </div>
           {p.portraitCaption[lang] && <figcaption>{p.portraitCaption[lang]}</figcaption>}

@@ -23,6 +23,13 @@
     __html: text(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\*([^*]+)\*/g, '<em>$1</em>'),
   });
   const img = (src, alt, missing) => (src ? h('img', { src, alt }) : h('div', { className: 'empty' }, missing));
+  // Khung nhìn chân dung giống web: object-position + phóng to quanh cùng điểm (src/components/Home.astro)
+  const num = (v, min, max, d) => { const n = Number(v); return v === '' || v == null || !Number.isFinite(n) ? d : Math.min(max, Math.max(min, n)); };
+  const focusStyle = (entry) => {
+    const x = num(get(entry, 'chan_dung_ngang'), 0, 100, 50), y = num(get(entry, 'chan_dung_doc'), 0, 100, 50);
+    const z = num(get(entry, 'chan_dung_phong_to'), 100, 300, 100) / 100;
+    return { objectPosition: `${x}% ${y}%`, transformOrigin: `${x}% ${y}%`, scale: String(z) };
+  };
   const sealLines = (s) => text(s || 'Bim').split('|').flatMap((p, i) => (i ? [h('br', { key: `b${i}` }), p.trim()] : [p.trim()]));
 
   /* ---------- Tác phẩm ---------- */
@@ -90,7 +97,9 @@
           h('h1', null, (lines.length ? lines : ['Câu tuyên ngôn']).map((l, i) => h('span', { key: i, style: { display: 'block' }, dangerouslySetInnerHTML: emph(l) }))),
           h('div', { className: 'lead' }, paras.map((p, i) => h('p', { key: i }, p)))),
         h('figure', { style: { margin: 0 } },
-          h('div', { className: 'portrait' }, img(portrait, 'Chân dung', 'Chưa có ảnh chân dung'), logo ? h('img', { className: 'logo-mark', src: logo, alt: '' }) : h('span', { className: 'seal' }, sealLines(get(entry, 'con_dau')))),
+          h('div', { className: 'portrait' }, h('div', { className: 'crop' }, portrait
+            ? h('img', { src: portrait, alt: 'Chân dung', style: focusStyle(entry) })
+            : h('div', { className: 'empty' }, 'Chưa có ảnh chân dung')), logo ? h('img', { className: 'logo-mark', src: logo, alt: '' }) : h('span', { className: 'seal' }, sealLines(get(entry, 'con_dau')))),
           caption && h('figcaption', { className: 'cap' }, caption))),
       h('div', { className: 'contact' },
         h('p', { className: 'label' }, 'Liên hệ'),

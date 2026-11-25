@@ -34,6 +34,8 @@ export interface Profile {
   headline: Record<Lang, string>;
   bio: Record<Lang, string>;
   portrait?: ImageMetadata;
+  /** Khung nhìn ảnh chân dung trong khung 3:4: tâm (x%, y%) và độ phóng to (1 = vừa khung) */
+  portraitFocus: { x: number; y: number; zoom: number };
   portraitCaption: Record<Lang, string>;
   ask: Record<Lang, string>;
   status: Record<Lang, string>;
@@ -124,6 +126,11 @@ export function getProfile(): Profile {
     headline: pair(d.tieu_de_vi, d.tieu_de_en),
     bio: pair(d.gioi_thieu_vi, d.gioi_thieu_en),
     portrait: findImage(profileImages, '/src/data', d.anh_chan_dung, 'ảnh chân dung'),
+    portraitFocus: {
+      x: clamp(d.chan_dung_ngang, 0, 100, 50),
+      y: clamp(d.chan_dung_doc, 0, 100, 50),
+      zoom: clamp(d.chan_dung_phong_to, 100, 300, 100) / 100,
+    },
     portraitCaption: pair(d.chu_thich_anh_vi, d.chu_thich_anh_en),
     ask: pair(d.cau_hoi_vi, d.cau_hoi_en),
     status: pair(d.trang_thai_vi, d.trang_thai_en),
@@ -133,6 +140,12 @@ export function getProfile(): Profile {
     phone: str(d.dien_thoai) || undefined,
     seo: pair(d.mo_ta_seo_vi, d.mo_ta_seo_en),
   };
+}
+
+/** Số trong khoảng [min, max]; ô trống hoặc sai thì dùng giá trị mặc định. */
+function clamp(v: unknown, min: number, max: number, fallback: number) {
+  const n = Number(v);
+  return v === '' || v == null || !Number.isFinite(n) ? fallback : Math.min(max, Math.max(min, n));
 }
 
 /** "*chữ*" → <em>chữ</em> (sau khi đã thoát HTML). */

@@ -10,9 +10,9 @@ const u = t(lang);
 const p = getProfile();
 const works = getWorks();
 const next = works[(works.indexOf(w) + 1) % works.length];
-// Ảnh lớn cho khung xem ảnh (WebP, cạnh dài tối đa 2400px)
+// Ảnh lớn cho khung xem ảnh: giữ kích thước và tỉ lệ gốc (WebP chất lượng cao)
 const full = await Promise.all(
-  w.images.map((img) => getImage({ src: img, width: Math.min(img.width, 2400), format: 'webp', quality: IMG_QUALITY })),
+  w.images.map((img) => getImage({ src: img, width: img.width, format: 'webp', quality: 92 })),
 );
 const shape = (k: number) => ['w', 'l', 'r'][k % 3];
 const title = `${w.title[lang]} · ${p.name.vi} · ${p.name.en}`;

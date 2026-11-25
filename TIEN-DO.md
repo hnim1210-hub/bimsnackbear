@@ -17,6 +17,8 @@
 - Xem bảng công nghệ trong `PLAN.md` và mục Thiết kế trong `CLAUDE.md`.
 - Thứ tự tác phẩm = trường `order` do CMS ghi khi kéo-thả; tranh chưa có `order` xếp cuối.
 - Không hiển thị năm trên con đường; năm chỉ ở trang chi tiết.
+- Ảnh tải lên giữ nguyên file gốc (không nén/thu nhỏ trong CMS). Ảnh tranh không bao giờ bị cắt; xem lớn = kích thước gốc.
+- Chân dung: khung 3:4, chỉnh vị trí (ngang/dọc %) và phóng to (%) trong CMS; web giữ ảnh gốc, chỉ dời khung nhìn.
 - Luôn nền sáng (`color-scheme: only light`), bỏ chế độ tối: tranh hiện trên cùng một nền với mọi người xem.
 
 ## Việc tiếp theo ⏭️

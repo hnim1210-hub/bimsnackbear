@@ -26,17 +26,12 @@ slug:
   clean_accents: true
   sanitize_replacement: "-"
 
-# Ảnh tải lên được nén nhẹ thành WebP (chất lượng 92), cạnh dài tối đa 3000px: đủ nét cho màn hình Retina.
+# Ảnh tải lên được giữ NGUYÊN file gốc (kích thước, tỉ lệ, định dạng). Web tự tạo các bản nhẹ để hiển thị.
+# Giới hạn 30MB/ảnh để kho GitHub không phình quá nhanh.
 media_libraries:
   default:
     config:
       max_file_size: 30000000
-      transformations:
-        raster_image:
-          format: webp
-          quality: 92
-          width: 3000
-          height: 3000
 
 collections:
   - name: tac-pham
@@ -74,8 +69,8 @@ collections:
       - { name: chat_lieu_en, label: "Chất liệu (English)", widget: string, required: false, hint: "Ví dụ: Watercolour on dó paper" }
       - { name: mo_ta_vi, label: "Mô tả (Tiếng Việt)", widget: text, required: false, hint: "Trên con đường chỉ hiện 4 dòng đầu; trang chi tiết hiện đủ." }
       - { name: mo_ta_en, label: "Mô tả (English)", widget: text, required: false }
-      - { name: anh_dai_dien, label: "Ảnh đại diện", widget: image, hint: "Ảnh hiện trên con đường và đầu trang chi tiết. Nên dùng ảnh đẹp nhất của bộ tranh." }
-      - { name: anh_chi_tiet, label: "Ảnh chi tiết", widget: image, multiple: true, required: false, hint: "Chọn nhiều ảnh cùng lúc được. Kéo để đổi thứ tự ảnh. Ảnh gốc nên có cạnh dài từ 2400px để xem lớn vẫn nét." }
+      - { name: anh_dai_dien, label: "Ảnh đại diện", widget: image, hint: "Ảnh hiện trên con đường và đầu trang chi tiết, giữ nguyên tỉ lệ gốc. Nên dùng ảnh đẹp nhất của bộ tranh." }
+      - { name: anh_chi_tiet, label: "Ảnh chi tiết", widget: image, multiple: true, required: false, hint: "Chọn nhiều ảnh cùng lúc được. Kéo để đổi thứ tự ảnh. Ảnh giữ nguyên kích thước và tỉ lệ gốc (tối đa 30MB/ảnh)." }
 
   - name: trang
     label: Giới thiệu & Liên hệ
@@ -101,7 +96,10 @@ collections:
           - { name: tieu_de_en, label: "Câu tuyên ngôn (English)", widget: text }
           - { name: gioi_thieu_vi, label: "Giới thiệu (Tiếng Việt)", widget: text, hint: "Cách một dòng trống để tách đoạn." }
           - { name: gioi_thieu_en, label: "Giới thiệu (English)", widget: text }
-          - { name: anh_chan_dung, label: "Ảnh chân dung", widget: image }
+          - { name: anh_chan_dung, label: "Ảnh chân dung", widget: image, hint: "Khung trên web là khổ dọc 3:4. Chỉnh 3 ô dưới để chọn phần ảnh hiện trong khung, xem kết quả ở khung Xem trước." }
+          - { name: chan_dung_ngang, label: "Chân dung · vị trí ngang (%)", widget: number, value_type: int, min: 0, max: 100, step: 1, default: 50, required: false, hint: "0 = lấy phần bên trái, 50 = giữa, 100 = bên phải." }
+          - { name: chan_dung_doc, label: "Chân dung · vị trí dọc (%)", widget: number, value_type: int, min: 0, max: 100, step: 1, default: 50, required: false, hint: "0 = lấy phần trên cùng, 50 = giữa, 100 = dưới cùng." }
+          - { name: chan_dung_phong_to, label: "Chân dung · phóng to (%)", widget: number, value_type: int, min: 100, max: 300, step: 5, default: 100, required: false, hint: "100 = vừa khung. Tăng lên (ví dụ 130) để phóng to vào khuôn mặt; ảnh có thể kém nét nếu phóng quá lớn." }
           - { name: chu_thich_anh_vi, label: "Chú thích ảnh chân dung (Tiếng Việt)", widget: string, required: false }
           - { name: chu_thich_anh_en, label: "Chú thích ảnh chân dung (English)", widget: string, required: false }
           - { name: cau_hoi_vi, label: "Câu mời ở phần Liên hệ (Tiếng Việt)", widget: string, hint: "Dùng * để tô đỏ nghiêng." }
