@@ -2,14 +2,14 @@
 // Logo / ấn triện: dùng ảnh logo tải lên trong trang quản trị (ô "Logo (ấn triện)");
 // nếu chưa có ảnh thì vẽ con dấu chữ từ ô "Chữ trên con dấu".
 import { Image } from 'astro:assets';
-import { getProfile } from '../lib/content';
+import { getProfile, IMG_QUALITY } from '../lib/content';
 
 interface Props { size: number; class?: string }
 const { size, class: cls } = Astro.props;
 const p = getProfile();
 ---
 {p.logo ? (
-  <Image src={p.logo} alt="" width={size * 2} height={Math.round((size * 2 * p.logo.height) / p.logo.width)}
+  <Image src={p.logo} alt="" width={size * 3} height={Math.round((size * 3 * p.logo.height) / p.logo.width)} quality={IMG_QUALITY}
     class:list={['logo-mark', cls]} style={`width:${size}px;height:${size}px`} aria-hidden="true" loading="eager" />
 ) : (
   <span class:list={['seal', cls]} aria-hidden="true" set:html={p.seal.split('|').map((s) => s.trim()).join('<br>')} />

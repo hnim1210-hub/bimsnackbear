@@ -6,6 +6,8 @@ import { parse } from 'yaml';
 import type { ImageMetadata } from 'astro';
 
 export type Lang = 'vi' | 'en';
+/** Chất lượng nén WebP khi dựng web (mặc định của Astro là 80, hơi thấp với tranh minh hoạ nét mảnh) */
+export const IMG_QUALITY = 90;
 export const LANGS: Lang[] = ['vi', 'en'];
 
 export interface Work {

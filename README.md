@@ -9,7 +9,7 @@ hai thứ tiếng Việt / Anh, xếp dọc theo một con đường đỏ son.
 ## Quản lý nội dung (không cần biết code)
 
 1. Mở **/admin** trên máy tính hoặc điện thoại → đăng nhập bằng **tên + mật khẩu** tài khoản quản trị.
-2. **Tác phẩm**: thêm / sửa / xoá tranh; tải ảnh đại diện và nhiều ảnh chi tiết (ảnh tự nén sang WebP, tối đa 2400px).
+2. **Tác phẩm**: thêm / sửa / xoá tranh; tải ảnh đại diện và nhiều ảnh chi tiết (ảnh tự nén nhẹ sang WebP chất lượng 92, cạnh dài tối đa 3000px).
 3. **Sắp thứ tự**: trong danh sách Tác phẩm, bấm nút sắp xếp (Reorder) rồi kéo-thả.
 4. **Giới thiệu & Liên hệ**: nghệ danh, **logo (ấn triện)**, chữ trên con dấu, câu tuyên ngôn, giới thiệu, ảnh chân dung, email, mạng xã hội.
 5. Bấm **Lưu (Save)** → khoảng 1–2 phút sau web tự cập nhật.

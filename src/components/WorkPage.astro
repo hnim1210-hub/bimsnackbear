@@ -1,7 +1,7 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { getProfile, getWorks, type Lang, type Work } from '../lib/content';
+import { getProfile, getWorks, IMG_QUALITY, type Lang, type Work } from '../lib/content';
 import { t, home, workUrl } from '../lib/i18n';
 
 interface Props { lang: Lang; work: Work }
@@ -10,9 +10,9 @@ const u = t(lang);
 const p = getProfile();
 const works = getWorks();
 const next = works[(works.indexOf(w) + 1) % works.length];
-// Ảnh lớn cho khung xem ảnh (WebP, cạnh dài tối đa 2000px)
+// Ảnh lớn cho khung xem ảnh (WebP, cạnh dài tối đa 2400px)
 const full = await Promise.all(
-  w.images.map((img) => getImage({ src: img, width: Math.min(img.width, 2000), format: 'webp' })),
+  w.images.map((img) => getImage({ src: img, width: Math.min(img.width, 2400), format: 'webp', quality: IMG_QUALITY })),
 );
 const shape = (k: number) => ['w', 'l', 'r'][k % 3];
 const title = `${w.title[lang]} · ${p.name.vi} · ${p.name.en}`;
@@ -25,7 +25,7 @@ const title = `${w.title[lang]} · ${p.name.vi} · ${p.name.en}`;
     </div>
 
     <button type="button" class="d-hero" data-full={full[0].src} data-alt={w.title[lang]} aria-label={u.enlarge(1)}>
-      <Image src={w.cover} alt={w.title[lang]} widths={[700, 1200, 1800, 2400]} sizes="(max-width: 1240px) 100vw, 1208px" loading="eager" style={`view-transition-name:vt-${w.slug}`} />
+      <Image src={w.cover} alt={w.title[lang]} widths={[700, 1200, 1800, 2400]} sizes="(max-width: 1240px) 100vw, 1208px" quality={IMG_QUALITY} loading="eager" style={`view-transition-name:vt-${w.slug}`} />
     </button>
 
     <div class="g12 detail-head">
@@ -46,7 +46,7 @@ const title = `${w.title[lang]} · ${p.name.vi} · ${p.name.en}`;
         {w.images.slice(1).map((img, k) => (
           <figure class={shape(k)}>
             <button type="button" data-full={full[k + 1].src} data-alt={`${w.title[lang]} ${k + 2}`} aria-label={u.enlarge(k + 2)}>
-              <Image src={img} alt={`${w.title[lang]} ${k + 2}`} widths={[500, 900, 1300, 1800]} sizes={shape(k) === 'w' ? '(max-width: 1240px) 100vw, 1208px' : '(max-width: 760px) 100vw, 700px'} />
+              <Image src={img} alt={`${w.title[lang]} ${k + 2}`} widths={[500, 900, 1300, 1800, 2400]} quality={IMG_QUALITY} sizes={shape(k) === 'w' ? '(max-width: 1240px) 100vw, 1208px' : '(max-width: 760px) 100vw, 700px'} />
             </button>
             <figcaption>{k + 2} / {w.images.length}</figcaption>
           </figure>
