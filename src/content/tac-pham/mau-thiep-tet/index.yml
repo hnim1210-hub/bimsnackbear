@@ -1,15 +1,27 @@
-title_vi: "[Mẫu] Thiệp Tết"
-title_en: "[Sample] Lunar New Year cards"
-loai: tranh-dat
-khach_hang: "[Tên khách hàng]"
-nam: 2026
-chat_lieu_vi: "Khắc gỗ kỹ thuật số"
-chat_lieu_en: "Digital woodcut"
-mo_ta_vi: "[Mô tả mẫu: khách cần gì, bạn vẽ thế nào.]"
-mo_ta_en: "[Sample description: what the client needed and how you drew it.]"
-anh_dai_dien: anh-dai-dien.webp
-anh_chi_tiet:
-  - chi-tiet-1.webp
-  - chi-tiet-2.webp
-  - chi-tiet-3.webp
 order: 2
+title_vi: Bộ tranh Dó Mai Thìn
+title_en: Mai Thin do paper
+loai: tranh-dat
+khach_hang: Dó Mai Thìn
+nam: 2026
+chat_lieu_vi: Kỹ thuật số
+chat_lieu_en: Digital
+mo_ta_vi: |-
+  Bộ tranh minh họa được thực hiện theo đơn đặt hàng của gia đình chị Mai - người Dao Tiền sinh sống tại bản Sưng, Đà Bắc. Lấy cảm hứng từ ý niệm “Lưu dấu”, bộ tranh khai thác những dấu ấn văn hóa của người Dao Tiền tại bản Sưng, Đà Bắc, thông qua chữ viết Nôm Dao Tiền và nghề làm giấy dó thủ công truyền thống.
+
+  Các tác phẩm tái hiện hai công đoạn đặc trưng trong quá trình làm giấy: seo giấy và dán giấy dó. Ngoài ra, tác phẩm còn thể hiện dấu vết văn hóa bản địa qua chữ viết Nôm Dao mà người Dao Tiền để lại trên giấy qua nhiều thời kỳ. Qua từng nét vẽ, bộ tranh không chỉ giới thiệu sản phẩm giấy dó nguyên chất được làm thủ công bởi người dân bản địa, mà còn góp phần lưu giữ và lan tỏa những giá trị văn hóa gắn liền với đời sống của cộng đồng người Dao Tiền.
+
+  Không chỉ hướng đến việc quảng bá sản phẩm, dự án còn là dịp lan tỏa những giá trị văn hóa của cộng đồng người Dao Tiền, góp phần đưa nghề làm giấy dó truyền thống đến gần hơn với công chúng.
+mo_ta_en: |-
+  This illustration series was commissioned by Ms. Mai’s family, members of the Dao Tien community living in Ban Sung, Da Bac, Vietnam. Inspired by the concept of “Imprints”, the series explores the cultural heritage of the Dao Tien people through their traditional Nom Dao script and the craft of handmade dó paper.
+
+  The illustrations depict two distinctive stages of the papermaking process: forming the paper sheets on a mould and drying them. They also capture traces of local heritage through Nom Dao characters, preserved on paper and passed down through generations.
+
+  Through each illustration, the series introduces pure handmade dó paper produced by local artisans, while celebrating and preserving the cultural values woven into the everyday life of the Dao Tien community.
+
+  Beyond promoting the product, the project seeks to bring greater visibility to the traditional craft of dó papermaking and share the cultural heritage of the Dao Tien people with a wider audience.
+anh_dai_dien: 1795609311744_1550661386515585458_9026458846847578227_246707859b2c3e88eeb46ed67d85f1e1.jpg
+anh_chi_tiet:
+  - 1795609311744_1550661386515585458_9026458846847578227_246707859b2c3e88eeb46ed67d85f1e1.jpg
+  - 1795609311775_1550661386515585458_9026458846847578227_6b22d4705c0f64774f82fc67c223c265.jpg
+  - 1795609311794_1550661386515585458_9026458846847578227_40dca1192d33ed4fa6c01e6cc2d724a3.jpg
