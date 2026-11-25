@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import SealMark from './SealMark.astro';
 import { getProfile, getWorks, emphasize, lines, paragraphs, type Lang } from '../lib/content';
@@ -13,12 +13,17 @@ const u = t(lang);
 const kinds = (['sang-tac', 'tranh-dat'] as const).filter((k) => works.some((w) => w.kind === k));
 const headline = lines(p.headline[lang]);
 const bio = paragraphs(p.bio[lang]);
+// Ảnh chuyển lần lượt khi rê chuột vào ảnh đại diện (WebP, rộng tối đa 1000px, chỉ tải khi rê chuột)
+const slides = await Promise.all(
+  works.map((w) => Promise.all(w.images.slice(1).map(async (img) =>
+    (await getImage({ src: img, width: Math.min(img.width, 1000), format: 'webp' })).src))),
+);
 const title = `${p.name.vi} · ${p.name.en}`;
 ---
 <Base lang={lang} title={title} altPath={home(lang === 'vi' ? 'en' : 'vi')} ogImage={works[0]?.cover.src}>
   <section class="hero" id="gioi-thieu" aria-label={u.navAbout}>
     <div class="wrap g12">
-      <div class="vlabel" aria-hidden="true">{lang === 'vi' ? 'Mộc · Mực · Son' : 'Wood · Ink · Cinnabar'}</div>
+      {p.vlabel[lang] && <div class="vlabel" aria-hidden="true">{p.vlabel[lang]}</div>}
       <div class="copy">
         {p.role[lang] && <p class="label" style="margin:0 0 var(--s3)">{p.role[lang]}</p>}
         <h1>{headline.map((l) => <span class="ln"><span set:html={emphasize(l)} /></span>)}</h1>
@@ -57,7 +62,7 @@ const title = `${p.name.vi} · ${p.name.en}`;
           <div class="rows" id="rows">
             {works.map((w, i) => (
               <article class:list={["row", { flip: i % 2 === 1 }]} data-kind={w.kind}>
-                <a class:list={['media', { tall: w.cover.height > w.cover.width * 1.05 }]} href={workUrl(lang, w.slug)} aria-label={u.viewWork(w.title[lang])}>
+                <a class:list={['media', { tall: w.cover.height > w.cover.width * 1.05 }]} href={workUrl(lang, w.slug)} aria-label={u.viewWork(w.title[lang])} data-slides={slides[i].length ? JSON.stringify(slides[i]) : undefined}>
                   <Image src={w.cover} alt={w.title[lang]} widths={[400, 700, 1000, 1300]} sizes="(max-width: 760px) 85vw, 540px" loading={i < 2 ? 'eager' : 'lazy'} style={`view-transition-name:vt-${w.slug}`} />
                   {w.images.length > 1 && <span class="count">{u.images(w.images.length)}</span>}
                 </a>
@@ -104,6 +109,8 @@ const title = `${p.name.vi} · ${p.name.en}`;
 <script>
   import { initTrail } from '../scripts/trail';
   import { initCopy } from '../scripts/copy';
+  import { initHoverSlides } from '../scripts/hover-slides';
   initTrail();
+  initHoverSlides();
   initCopy();
 </script>

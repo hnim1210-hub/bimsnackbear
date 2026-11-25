@@ -52,6 +52,7 @@ src/lib/i18n.ts                    chữ cố định của giao diện (vi/en)
 src/components/Home.astro          trang chủ (giới thiệu, con đường tác phẩm, liên hệ)
 src/components/WorkPage.astro      trang chi tiết tác phẩm + xem ảnh lớn
 src/scripts/trail.ts               con đường, máy bay giấy, điểm đỏ, bộ lọc
+src/scripts/hover-slides.ts        rê chuột vào ảnh đại diện → tự chuyển qua các ảnh của tác phẩm
 src/styles/global.css              giao diện (màu son trầm #9E2B3F)
 ```
 

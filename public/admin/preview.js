@@ -85,6 +85,7 @@
       h('p', { className: 'hint' }, `Xem trước đầu trang và phần Liên hệ (bản tiếng Việt). Tên trên thanh menu: ${text(get(entry, 'nghe_danh_vi'))} · ${text(get(entry, 'nghe_danh_en'))}`),
       h('div', { className: 'hero' },
         h('div', null,
+          text(get(entry, 'nhan_doc_vi')) && h('p', { className: 'label', style: { color: 'var(--son)', marginBottom: 6 } }, `Chữ dọc ở lề: ${text(get(entry, 'nhan_doc_vi'))}`),
           text(get(entry, 'vai_tro_vi')) && h('p', { className: 'label' }, text(get(entry, 'vai_tro_vi'))),
           h('h1', null, (lines.length ? lines : ['Câu tuyên ngôn']).map((l, i) => h('span', { key: i, style: { display: 'block' }, dangerouslySetInnerHTML: emph(l) }))),
           h('div', { className: 'lead' }, paras.map((p, i) => h('p', { key: i }, p)))),

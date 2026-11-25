@@ -6,6 +6,8 @@
 - Web Astro song ngữ (vi/en): giới thiệu đầu trang, con đường tác phẩm, trang chi tiết + xem ảnh lớn, liên hệ.
 - Trang quản trị Sveltia CMS tại `/admin`, kéo-thả thứ tự, tải nhiều ảnh, tự nén WebP.
 - Ô **Logo (ấn triện)** trong Giới thiệu & Liên hệ thay mọi vị trí logo (menu, chân dung, favicon, icon điện thoại, trang quản trị); trống thì dùng con dấu chữ.
+- Ô **Dòng chữ dọc ở lề trái** (vi/en, mặc định "Mộc · Mực · Son"); xoá trắng để ẩn.
+- Rê chuột vào ảnh đại diện trên con đường: sau ~1 giây tự chuyển lần lượt qua ảnh chi tiết (lặp), bỏ chuột về ảnh đại diện; chỉ trên máy có chuột (`src/scripts/hover-slides.ts`).
 - Trang quản trị có logo, biểu tượng mục, nút Xem trên web, khung xem trước giống web (`public/admin/preview.*`).
 - Đăng nhập qua **Sveltia CMS Additions** (Worker `bim-admin.hnim1210.workers.dev`): tài khoản riêng tên + mật khẩu.
 - Web chạy trên Cloudflare **Pages**: `bimsnackbear.pages.dev`.

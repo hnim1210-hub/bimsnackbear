@@ -93,6 +93,8 @@ collections:
           - { name: nghe_danh_en, label: "Nghệ danh (English)", widget: string }
           - { name: logo, label: "Logo (ấn triện)", widget: image, required: false, hint: "Thay mọi chỗ có logo: thanh menu, con dấu trên ảnh chân dung, biểu tượng tab trình duyệt và màn hình điện thoại, trang quản trị. Nên dùng ảnh vuông, nền trong suốt (PNG hoặc SVG), cạnh từ 512px. Bỏ trống thì dùng con dấu chữ ở ô dưới. Logo mới hiện sau khoảng 2 phút." }
           - { name: con_dau, label: "Chữ trên con dấu", widget: string, hint: "Dùng khi chưa có ảnh logo. Ngắn, 2–4 ký tự là đẹp nhất. Dùng | để xuống dòng." }
+          - { name: nhan_doc_vi, label: "Dòng chữ dọc ở lề trái (Tiếng Việt)", widget: string, required: false, default: "Mộc · Mực · Son", hint: "Dòng chữ viết dọc cạnh câu tuyên ngôn (chỉ hiện trên máy tính). Xoá trắng để ẩn." }
+          - { name: nhan_doc_en, label: "Dòng chữ dọc ở lề trái (English)", widget: string, required: false, default: "Wood · Ink · Cinnabar", hint: "Bỏ trống thì bản tiếng Anh dùng chữ tiếng Việt." }
           - { name: vai_tro_vi, label: "Dòng nhỏ trên tiêu đề (Tiếng Việt)", widget: string }
           - { name: vai_tro_en, label: "Dòng nhỏ trên tiêu đề (English)", widget: string }
           - { name: tieu_de_vi, label: "Câu tuyên ngôn (Tiếng Việt)", widget: text, hint: "Mỗi dòng là một dòng trên trang. Đặt chữ giữa hai dấu * để tô đỏ nghiêng, ví dụ: câu chuyện *văn hoá Việt*" }

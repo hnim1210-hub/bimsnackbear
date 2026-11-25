@@ -109,7 +109,10 @@ section.block{padding-block:var(--s7) var(--s6)}
 .row .medium{font-family:var(--f-display);font-style:italic;color:var(--ink-soft)}
 .row .desc{color:var(--ink-soft);font-size:15px;margin:0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .row .more{align-self:flex-start;font-size:14px;text-decoration:none;border-bottom:1px solid var(--son);padding-bottom:2px}
-.row .count{position:absolute;left:10px;bottom:10px;background:var(--paper);font-size:12px;padding:2px 8px}
+/* Ảnh chuyển khi rê chuột: phủ lên ảnh đại diện, giữ nguyên khung */
+.row .media .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;pointer-events:none}
+.row .media .slide.on{opacity:1}
+.row .count{z-index:1;position:absolute;left:10px;bottom:10px;background:var(--paper);font-size:12px;padding:2px 8px}
 .trail-end{text-align:center;margin:var(--s6) 0 0;position:relative;z-index:1}
 .trail-end span{background:var(--paper);padding:4px 12px}
 .empty{color:var(--ink-soft)}
@@ -234,6 +237,6 @@ dl.facts dd{margin:0}
     .js .row .media,.js .row.flip .media,.js .row.in .media,.js .row.in.flip .media{animation-name:inkL}
   }
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.row .media img{transition:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.row .media img,.row .media .slide{transition:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 .links a.val{text-decoration:none}
 .links a.val:hover{color:var(--son)}

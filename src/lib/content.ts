@@ -27,6 +27,8 @@ export interface Profile {
   /** Logo / ấn triện tải lên trong CMS; không có thì dùng con dấu chữ `seal` */
   logo?: ImageMetadata;
   role: Record<Lang, string>;
+  /** Dòng chữ dọc ở lề trái đầu trang, ví dụ "Mộc · Mực · Son"; trống thì ẩn */
+  vlabel: Record<Lang, string>;
   headline: Record<Lang, string>;
   bio: Record<Lang, string>;
   portrait?: ImageMetadata;
@@ -115,6 +117,8 @@ export function getProfile(): Profile {
     seal: str(d.con_dau) || 'Bim',
     logo: findImage(profileImages, '/src/data', d.logo, 'logo'),
     role: pair(d.vai_tro_vi, d.vai_tro_en),
+    // Chưa có ô này trong file (nội dung cũ) thì dùng chữ mặc định; xoá trắng ô thì ẩn dòng chữ
+    vlabel: 'nhan_doc_vi' in d ? pair(d.nhan_doc_vi, d.nhan_doc_en) : { vi: 'Mộc · Mực · Son', en: 'Wood · Ink · Cinnabar' },
     headline: pair(d.tieu_de_vi, d.tieu_de_en),
     bio: pair(d.gioi_thieu_vi, d.gioi_thieu_en),
     portrait: findImage(profileImages, '/src/data', d.anh_chan_dung, 'ảnh chân dung'),
