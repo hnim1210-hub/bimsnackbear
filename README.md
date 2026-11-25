@@ -11,7 +11,7 @@ hai thứ tiếng Việt / Anh, xếp dọc theo một con đường đỏ son.
 1. Mở **/admin** trên máy tính hoặc điện thoại → đăng nhập bằng **tên + mật khẩu** tài khoản quản trị.
 2. **Tác phẩm**: thêm / sửa / xoá tranh; tải ảnh đại diện và nhiều ảnh chi tiết (ảnh tự nén sang WebP, tối đa 2400px).
 3. **Sắp thứ tự**: trong danh sách Tác phẩm, bấm nút sắp xếp (Reorder) rồi kéo-thả.
-4. **Giới thiệu & Liên hệ**: nghệ danh, chữ trên con dấu, câu tuyên ngôn, giới thiệu, ảnh chân dung, email, mạng xã hội.
+4. **Giới thiệu & Liên hệ**: nghệ danh, **logo (ấn triện)**, chữ trên con dấu, câu tuyên ngôn, giới thiệu, ảnh chân dung, email, mạng xã hội.
 5. Bấm **Lưu (Save)** → khoảng 1–2 phút sau web tự cập nhật.
 
 Khi sửa, khung **Xem trước** bên phải hiện nội dung đúng kiểu trình bày trên web (thẻ trên con đường, trang chi tiết,
@@ -42,7 +42,9 @@ qua một GitHub App chỉ được cài cho kho `bimsnackbear`.
 ```
 public/admin/config.yml            cấu hình trang quản trị (Sveltia CMS)
 public/admin/preview.js|css       khung xem trước giống web trong trang quản trị
-public/admin/logo.svg              logo con dấu của trang quản trị
+scripts/brand.mjs                  tạo biểu tượng tab, màn hình điện thoại, logo trang quản trị (public/brand/) từ ô Logo
+src/assets/con-dau-mac-dinh.svg    con dấu mặc định khi chưa tải logo
+src/components/SealMark.astro      logo/con dấu trên thanh menu và ảnh chân dung
 src/content/tac-pham/<slug>/       mỗi tác phẩm 1 thư mục: index.yml + ảnh
 src/data/thong-tin.yml             giới thiệu & liên hệ (+ ảnh chân dung cùng thư mục)
 src/lib/content.ts                 đọc nội dung, kiểm tra ảnh

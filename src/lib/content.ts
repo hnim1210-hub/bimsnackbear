@@ -24,6 +24,8 @@ export interface Work {
 export interface Profile {
   name: Record<Lang, string>;
   seal: string;
+  /** Logo / ấn triện tải lên trong CMS; không có thì dùng con dấu chữ `seal` */
+  logo?: ImageMetadata;
   role: Record<Lang, string>;
   headline: Record<Lang, string>;
   bio: Record<Lang, string>;
@@ -53,7 +55,7 @@ const profileFile = import.meta.glob<string>('/src/data/thong-tin.yml', {
   eager: true,
 });
 const profileImages = import.meta.glob<ImageMetadata>(
-  '/src/data/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP}',
+  '/src/data/*.{jpg,jpeg,png,webp,avif,svg,JPG,JPEG,PNG,WEBP,SVG}',
   { import: 'default', eager: true },
 );
 
@@ -111,6 +113,7 @@ export function getProfile(): Profile {
   return {
     name: pair(d.nghe_danh_vi, d.nghe_danh_en),
     seal: str(d.con_dau) || 'Bim',
+    logo: findImage(profileImages, '/src/data', d.logo, 'logo'),
     role: pair(d.vai_tro_vi, d.vai_tro_en),
     headline: pair(d.tieu_de_vi, d.tieu_de_en),
     bio: pair(d.gioi_thieu_vi, d.gioi_thieu_en),

@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import SealMark from './SealMark.astro';
 import { getProfile, getWorks, emphasize, lines, paragraphs, type Lang } from '../lib/content';
 import { t, home, workUrl } from '../lib/i18n';
 
@@ -28,7 +29,7 @@ const title = `${p.name.vi} · ${p.name.en}`;
         <figure>
           <div class="portrait">
             <Image src={p.portrait} alt={p.portraitCaption[lang] || p.name[lang]} widths={[360, 540, 720]} sizes="(max-width: 760px) 60vw, 300px" loading="eager" />
-            <span class="seal" aria-hidden="true" set:html={p.seal.split('|').map((s) => s.trim()).join('<br>')} />
+            <SealMark size={64} class="stamp" />
           </div>
           {p.portraitCaption[lang] && <figcaption>{p.portraitCaption[lang]}</figcaption>}
         </figure>

@@ -5,9 +5,9 @@
   "private": true,
   "description": "Gallery tranh của Bim · SnacK Bear",
   "scripts": {
-    "cms": "node scripts/copy-cms.mjs",
-    "dev": "npm run cms && astro dev",
-    "build": "npm run cms && astro build",
+    "prepare-assets": "node scripts/copy-cms.mjs && node scripts/brand.mjs",
+    "dev": "npm run prepare-assets && astro dev",
+    "build": "npm run prepare-assets && astro build",
     "preview": "astro preview"
   },
   "dependencies": {

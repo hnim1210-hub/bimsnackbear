@@ -11,9 +11,10 @@ backend:
   base_url: https://bim-admin.hnim1210.workers.dev
 
 app_title: Quản trị · Bim
-# Logo con dấu ở trang đăng nhập, thanh trên cùng và biểu tượng tab trình duyệt
+# Logo ở trang đăng nhập, thanh trên cùng và tab trình duyệt. Ảnh này được tạo lúc dựng web
+# (scripts/brand.mjs) từ ô "Logo (ấn triện)" bên dưới, nên đổi logo ở đó là trang quản trị đổi theo.
 logo:
-  src: /admin/logo.svg
+  src: /brand/logo.png
 site_url: https://bimsnackbear.pages.dev
 
 # Thư viện ảnh chung (ảnh tải lên ngoài một tác phẩm cụ thể). Ảnh của từng tác phẩm
@@ -90,7 +91,8 @@ collections:
         fields:
           - { name: nghe_danh_vi, label: "Nghệ danh (Tiếng Việt)", widget: string }
           - { name: nghe_danh_en, label: "Nghệ danh (English)", widget: string }
-          - { name: con_dau, label: "Chữ trên con dấu", widget: string, hint: "Ngắn, 2–4 ký tự là đẹp nhất. Dùng | để xuống dòng." }
+          - { name: logo, label: "Logo (ấn triện)", widget: image, required: false, hint: "Thay mọi chỗ có logo: thanh menu, con dấu trên ảnh chân dung, biểu tượng tab trình duyệt và màn hình điện thoại, trang quản trị. Nên dùng ảnh vuông, nền trong suốt (PNG hoặc SVG), cạnh từ 512px. Bỏ trống thì dùng con dấu chữ ở ô dưới. Logo mới hiện sau khoảng 2 phút." }
+          - { name: con_dau, label: "Chữ trên con dấu", widget: string, hint: "Dùng khi chưa có ảnh logo. Ngắn, 2–4 ký tự là đẹp nhất. Dùng | để xuống dòng." }
           - { name: vai_tro_vi, label: "Dòng nhỏ trên tiêu đề (Tiếng Việt)", widget: string }
           - { name: vai_tro_en, label: "Dòng nhỏ trên tiêu đề (English)", widget: string }
           - { name: tieu_de_vi, label: "Câu tuyên ngôn (Tiếng Việt)", widget: text, hint: "Mỗi dòng là một dòng trên trang. Đặt chữ giữa hai dấu * để tô đỏ nghiêng, ví dụ: câu chuyện *văn hoá Việt*" }

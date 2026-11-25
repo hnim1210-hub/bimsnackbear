@@ -72,6 +72,7 @@
     const lines = text(get(entry, 'tieu_de_vi')).split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
     const paras = text(get(entry, 'gioi_thieu_vi')).split(/\r?\n\s*\r?\n/).map((s) => s.trim()).filter(Boolean);
     const portrait = url(getAsset, get(entry, 'anh_chan_dung'));
+    const logo = url(getAsset, get(entry, 'logo'));
     const caption = text(get(entry, 'chu_thich_anh_vi'));
     const links = [
       ['Email', text(get(entry, 'email'))],
@@ -88,7 +89,7 @@
           h('h1', null, (lines.length ? lines : ['Câu tuyên ngôn']).map((l, i) => h('span', { key: i, style: { display: 'block' }, dangerouslySetInnerHTML: emph(l) }))),
           h('div', { className: 'lead' }, paras.map((p, i) => h('p', { key: i }, p)))),
         h('figure', { style: { margin: 0 } },
-          h('div', { className: 'portrait' }, img(portrait, 'Chân dung', 'Chưa có ảnh chân dung'), h('span', { className: 'seal' }, sealLines(get(entry, 'con_dau')))),
+          h('div', { className: 'portrait' }, img(portrait, 'Chân dung', 'Chưa có ảnh chân dung'), logo ? h('img', { className: 'logo-mark', src: logo, alt: '' }) : h('span', { className: 'seal' }, sealLines(get(entry, 'con_dau')))),
           caption && h('figcaption', { className: 'cap' }, caption))),
       h('div', { className: 'contact' },
         h('p', { className: 'label' }, 'Liên hệ'),
