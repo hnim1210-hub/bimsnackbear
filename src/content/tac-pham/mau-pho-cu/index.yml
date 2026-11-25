@@ -1,15 +1,28 @@
-title_vi: "[Mẫu] Phố cũ"
-title_en: "[Sample] Old Quarter"
+order: 1
+title_vi: TÂM TĨNH MÃ AN
+title_en: TAM TINH MA AN
 loai: sang-tac
-nam: 2025
-chat_lieu_vi: "Mực tàu, son"
-chat_lieu_en: "Ink and cinnabar"
-mo_ta_vi: "[Mô tả mẫu: cảm hứng và câu chuyện phía sau bộ tranh. Thay bằng mô tả thật trong trang quản trị.]"
-mo_ta_en: "[Sample description: the inspiration and story behind the series. Replace it in the admin page.]"
-anh_dai_dien: anh-dai-dien.webp
+khach_hang: ''
+nam: 2026
+chat_lieu_vi: Digital
+chat_lieu_en: Digital
+mo_ta_vi: |-
+  MỜI LÊN NGỰA
+
+  Khép lại một chặng đường, mỗi người đều mang theo những dấu ấn và bài học riêng. Trên lưng chú ngựa chín hồng mao, hành trang ấy hóa thành động lực để tiếp tục rong ruổi trên những miền đất mới.
+
+  Lấy cảm hứng từ hình tượng ngựa và tinh thần phiêu lưu, tác phẩm là lời mời bước lên yên, bỏ lại những ngần ngại phía sau và đón chờ những điều chưa biết. Bởi hành trình phía trước luôn rộng mở với những ai sẵn sàng lên đường.
+mo_ta_en: |-
+  HOP ON, LET’S RIDE
+
+  As one chapter comes to an end, we carry its lessons and memories with us into the next. Riding on the back of the Nine-Red-Mane Horse, these experiences become the fuel for another journey ahead.
+
+  Rooted in the rich cultural traditions of the East and inspired by the festive spirit of Vietnamese Lunar New Year, this artwork draws on the horse as a symbol of movement, renewal, and new beginnings. It captures the excitement of setting off on a new journey — carrying the past with us, embracing the unknown, and welcoming the possibilities that lie ahead.
+
+  So, hop on and let the journey begin!
+anh_dai_dien: 1795609311855_1550661386515585458_9026458846847578227_cbea0689c6e57e05a4a22047a9e7e981.jpg
 anh_chi_tiet:
   - chi-tiet-1.webp
   - chi-tiet-2.webp
   - chi-tiet-3.webp
   - chi-tiet-4.webp
-order: 1
