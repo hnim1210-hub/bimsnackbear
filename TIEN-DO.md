@@ -14,6 +14,7 @@
 - Xem bảng công nghệ trong `PLAN.md` và mục Thiết kế trong `CLAUDE.md`.
 - Thứ tự tác phẩm = trường `order` do CMS ghi khi kéo-thả; tranh chưa có `order` xếp cuối.
 - Không hiển thị năm trên con đường; năm chỉ ở trang chi tiết.
+- Luôn nền sáng (`color-scheme: only light`), bỏ chế độ tối: tranh hiện trên cùng một nền với mọi người xem.
 
 ## Việc tiếp theo ⏭️
 1. Chủ kho chạy trình cài đặt Additions (Use Admin Secret → tạo admin → cài GitHub App cho `bimsnackbear`).

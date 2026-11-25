@@ -34,8 +34,8 @@ const desc = description || p.seo[lang];
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     {desc && <meta name="description" content={desc} />}
-    <meta name="theme-color" content="#FCFBF8" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#171412" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="only light" />
+    <meta name="theme-color" content="#FCFBF8" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {site && <link rel="canonical" href={new URL(Astro.url.pathname, site)} />}
     {site && <link rel="alternate" hreflang="vi" href={new URL(viPath, site)} />}

@@ -7,10 +7,10 @@
   --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
   --s1:4px;--s2:8px;--s3:16px;--s4:24px;--s5:40px;--s6:64px;--s7:112px;
   --maxw:1240px;--ease:cubic-bezier(.2,.7,.2,1);
-  color-scheme:light;
+  /* Luôn nền sáng (giấy dó), kể cả khi máy người xem bật chế độ tối;
+     "only light" cũng xin trình duyệt không tự ép trang sang màu tối. */
+  color-scheme:only light;
 }
-@media (prefers-color-scheme:dark){:root{
-  --paper:#171412;--paper-2:#221E1B;--ink:#EDE8E1;--ink-soft:#A39A90;--line:#36302B;--son:#D9607A;--son-ink:#171412;--grain-op:.035;color-scheme:dark}}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}

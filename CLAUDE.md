@@ -14,7 +14,7 @@ Người dùng nói tiếng Việt; trả lời bằng tiếng Việt, giải th
 
 1. **Nội dung do chủ kho tự quản lý qua /admin (Sveltia CMS)**. Không sửa tay `src/content/` hay `src/data/`
    trừ khi được yêu cầu; nếu đổi tên/định dạng trường, sửa đồng bộ `public/admin/config.yml` + `src/lib/content.ts`.
-2. **Thiết kế đã chốt** (đừng tự đổi): nền giấy dó gần trắng, mực đen ấm, đỏ son trầm `#9E2B3F` (nền tối `#D9607A`);
+2. **Thiết kế đã chốt** (đừng tự đổi): nền giấy dó gần trắng, mực đen ấm, đỏ son trầm `#9E2B3F`; **luôn nền sáng, không có chế độ tối**;
    Fraunces + Be Vietnam Pro; con đường uốn nhẹ liền mạch, điểm đỏ ở từng tác phẩm, máy bay giấy nét đỏ 2D;
    ảnh/chữ đổi bên xen kẽ; giới thiệu ở đầu trang; không có năm trên con đường.
 3. Mọi chữ giao diện phải có đủ **vi + en** (`src/lib/i18n.ts`).
